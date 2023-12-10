@@ -1,4 +1,5 @@
 ﻿using BosonHiggsApi.BL.Enums;
+using BosonHiggsApi.BL.Helpers;
 using BosonHiggsApi.BL.Models;
 using BosonHiggsApi.DL;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,7 @@ namespace BosonHiggsApi.BL.Services
         {
             var result = new List<LeaderModel>();
             var users = await _context.Users
+                .Where(x => x.Token != AppConstants.AdminToken)
                 .Include(x => x.UserLevels)
                 .ThenInclude(x => x.Level)
                 .ToListAsync();
@@ -45,6 +47,7 @@ namespace BosonHiggsApi.BL.Services
                         TotalSpentTime = 0,
                         UsedHintsCount = 0,
                         UsedNextLevelHintsCount = 0,
+                        LastLevelStartedDateTime = null
                     });
                 }
                 else
@@ -56,13 +59,14 @@ namespace BosonHiggsApi.BL.Services
                         TotalSpentTime = totalSpentTime,
                         UsedHintsCount = user.UserLevels.Count(x => x.UsedHint == true),
                         UsedNextLevelHintsCount = user.UserLevels.Count(x => x.UsedNextLevelHint == true),
+                        LastLevelStartedDateTime = last.CreatedDateTime
                     });
                 }
             }
 
-
-            return result.OrderByDescending(x => x.LevelType)
-                .ThenBy(x => x.TotalSpentTime) //TODO: who pass first or total time?
+            return result
+                .OrderByDescending(x => x.LevelType)
+                .ThenBy(x => x.LastLevelStartedDateTime) //TODO: configure-out
                 .ThenBy(x => x.UsedHintsCount)
                 .ThenBy(x => x.UsedNextLevelHintsCount)
                 .ToList();

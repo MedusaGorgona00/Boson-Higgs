@@ -72,7 +72,6 @@ namespace BosonHiggsApi.BL
             }
             catch (Exception ex)
             {
-
             }
             finally
             {

@@ -7,6 +7,7 @@ namespace BosonHiggsApi.BL.Models
         public string NickName { get; set; }
         public LevelType LevelType { get; set; }
         public int TotalSpentTime{ get; set; }
+        public DateTime? LastLevelStartedDateTime { get; set; }
         public int UsedHintsCount { get; set; }
         public int UsedNextLevelHintsCount { get; set; }
     }

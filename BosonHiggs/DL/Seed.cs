@@ -139,7 +139,7 @@ namespace BosonHiggsApi.DL
 
         public static async Task SeedAdmin(ApplicationDbContext context)
         {
-            if (!context.Users.Any(x => x.Token == AppConstants.AdminToken))
+            if (!context.Users.Any(x => x.NickName == "Admin"))
             {
                 await context.Users.AddAsync(new User
                 {

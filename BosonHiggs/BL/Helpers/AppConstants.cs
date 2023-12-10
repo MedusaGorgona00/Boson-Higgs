@@ -11,5 +11,10 @@
         public static readonly string LastLevelPassword = "SimbaTest"; //TODO: change
 
         public static readonly string AdminToken = Guid.NewGuid().ToString();
+
+        public static readonly string BadWords = "prick, dick, cunt, pussy, pidor, suka, " +
+                                                 "loh, gay, fuck, bitch, лох, жунбаш, гей, " +
+                                                 "мырк, фак, пидор, пидарас, сука, блядь, " +
+                                                 "еба, скейн, далб, бля, пизд, хуй";
     }
 }

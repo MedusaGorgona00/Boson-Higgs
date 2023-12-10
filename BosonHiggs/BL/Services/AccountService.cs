@@ -20,6 +20,8 @@ namespace BosonHiggsApi.BL.Services
 
         public async Task<string> RegisterUserAsync(RegisterModel model, string ip)
         {
+            if (model.NickName.Contains("Admin"))
+                throw new BadRequestException($"User's nickname can't contain \'Admin\'");
             if (_context.Users.Any(x => x.Email == model.Email))
                 throw new BadRequestException($"User with the same email - \'{model.Email}\' already exist");
             if (_context.Users.Any(x => x.NickName == model.NickName))
