@@ -1,10 +1,13 @@
-﻿using BosonHiggsApi.BL.Exceptions;
+﻿using BosonHiggsApi.BL.Enums;
+using BosonHiggsApi.BL.Exceptions;
 using BosonHiggsApi.BL.Helpers;
 using BosonHiggsApi.BL.Models;
 using BosonHiggsApi.BL.Models.EmailContents;
 using BosonHiggsApi.BL.Services.Email;
 using BosonHiggsApi.DL;
 using BosonHiggsApi.DL.Entities;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace BosonHiggsApi.BL.Services
 {
@@ -50,6 +53,38 @@ namespace BosonHiggsApi.BL.Services
             }
 
             return user.Token;
+        }
+
+        public async Task<LeaderModel> AboutMe(string userToken)
+        {
+            var user = await _context.Users
+                .Include(x => x.UserLevels)
+                .FirstOrDefaultAsync(x => x.Token == userToken);
+            if (user == null)
+                throw new BadRequestException($"User with the token - \'{userToken}\' doesn't exist");
+
+            var totalSpentTime = 0;
+            var last = user.UserLevels.FirstOrDefault();
+            foreach (var userLevel in user.UserLevels.OrderBy(x => x.CreatedDateTime))
+            {
+                if (userLevel.Level.Type == LevelType.First)
+                {
+                    last = userLevel;
+                    continue;
+                }
+
+                totalSpentTime += userLevel.CreatedDateTime.Minute - last.CreatedDateTime.Minute;
+            }
+
+            return new LeaderModel
+            {
+                NickName = user.NickName,
+                LevelType = user.UserLevels.Max(x => x.Level.Type),
+                TotalSpentTime = totalSpentTime,
+                UsedHintsCount = user.UserLevels.Count(x => x.UsedHint == true),
+                UsedNextLevelHintsCount = user.UserLevels.Count(x => x.UsedNextLevelHint == true),
+                LastLevelStartedDateTime = last.CreatedDateTime
+            };
         }
     }
 }

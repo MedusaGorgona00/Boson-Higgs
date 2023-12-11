@@ -15,6 +15,6 @@
         public static readonly string BadWords = "prick, dick, cunt, pussy, pidor, suka, " +
                                                  "loh, gay, fuck, bitch, лох, жунбаш, гей, " +
                                                  "мырк, фак, пидор, пидарас, сука, блядь, " +
-                                                 "еба, скейн, далб, бля, пизд, хуй";
+                                                 "еба, скейн, сгейн, далб, бля, пизд, хуй, blya, loh";
     }
 }

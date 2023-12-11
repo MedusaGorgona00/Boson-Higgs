@@ -29,5 +29,15 @@ namespace BosonHiggsApi.Controllers
 
             return Ok(result);
         }
+
+
+        [HttpGet]
+        [ProducesResponseType(typeof(LeaderModel), StatusCodes.Status200OK)]
+        public async Task<IActionResult> AboutMe(string userToken)
+        {
+            var result = await _accountService.AboutMe(userToken);
+
+            return Ok(result);
+        }
     }
 }
