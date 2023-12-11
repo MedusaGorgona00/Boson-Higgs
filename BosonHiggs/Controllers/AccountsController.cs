@@ -31,7 +31,7 @@ namespace BosonHiggsApi.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet("about-me")]
         [ProducesResponseType(typeof(LeaderModel), StatusCodes.Status200OK)]
         public async Task<IActionResult> AboutMe(string userToken)
         {
