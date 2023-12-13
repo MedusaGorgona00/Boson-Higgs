@@ -27,8 +27,8 @@ namespace BosonHiggsApi.DL
             try
             {
                 var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
-                await SeedLevels(context);
-                await SeedAdmin(context);
+                //await SeedLevels(context); //TODO: re-comment after changing connectionString
+                //await SeedAdmin(context);
             }
             catch (Exception ex)
             {
