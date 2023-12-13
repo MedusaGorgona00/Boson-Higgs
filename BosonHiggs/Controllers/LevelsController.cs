@@ -31,7 +31,7 @@ namespace BosonHiggsApi.Controllers
 
 
         [HttpGet("by-token")]
-        [IpRequestThrottling(10, 1)]
+        [IpRequestThrottling(100, 1)]
         [ProducesResponseType(typeof(LevelModel.GetByUser), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetByToken([Required] string token, [Required] string userToken)
         {

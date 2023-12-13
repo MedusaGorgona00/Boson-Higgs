@@ -26,8 +26,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment()) //TODO: change 16
+//{
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
@@ -43,7 +43,7 @@ if (app.Environment.IsDevelopment())
         c.EnableFilter();
         c.ShowExtensions();
     });
-}
+//}
 app.MapHub<ChatHub>("/chat");
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseAuthorization();

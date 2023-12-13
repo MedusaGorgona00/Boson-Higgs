@@ -54,6 +54,7 @@ namespace BosonHiggsApi.BL.Services
 
             var chatModel = new MessageModel.Out()
             {
+                Id = message.Id,
                 Text = message.Text,
                 NickName = user.NickName,
                 IsDeleted = message.IsDeleted,

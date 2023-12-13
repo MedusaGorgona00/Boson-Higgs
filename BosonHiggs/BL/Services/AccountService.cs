@@ -45,7 +45,7 @@ namespace BosonHiggsApi.BL.Services
 
             try
             {
-                //await _emailSender.SendAsync(new SendTokenEmailContent(user.NickName, user.Token), user.Email); //TODO: check
+                await _emailSender.SendAsync(new SendTokenEmailContent(user.NickName, user.Token), user.Email); //TODO: check
             }
             catch (Exception ex)
             {
