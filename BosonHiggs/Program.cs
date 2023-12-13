@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbCtx(configuration)
-    .AddSerilog1(configuration, logging)
+    //.AddSerilog1(configuration, logging) TODO: recomment after changing connectionString
     .RegisterServices()
     .AddEmailServices(configuration)
     .AddOptions(configuration);
