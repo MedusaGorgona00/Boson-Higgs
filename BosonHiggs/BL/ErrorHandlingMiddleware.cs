@@ -80,7 +80,6 @@ namespace BosonHiggsApi.BL
         /// <returns></returns>
         private Task HandleExceptionAsync(HttpContext context, Exception exception, string bodyAsText)
         {
-            var test = context.Response.StatusCode; //TODO:  check
             var (code, message) = GetHttpStatusCodeAndMessage(exception);
             if (code >= HttpStatusCode.InternalServerError)
             {

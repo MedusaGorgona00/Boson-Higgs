@@ -118,5 +118,44 @@ namespace BosonHiggsApi.BL
 
             return services;
         }
+        
+        public static IServiceCollection AddCorsPolicy(this IServiceCollection services, string corsPolicyName,
+            IConfiguration configuration)
+        {
+            var corsOption = configuration.GetSection("CORS").Get<CorsOptions>() ?? new CorsOptions();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(corsPolicyName,
+                    builder =>
+                    {
+                        if (corsOption.AllowedHosts != null && corsOption.AllowedHosts.Any())
+                        {
+                            builder.WithOrigins(corsOption.AllowedHosts.ToArray());
+                        }
+                        else
+                        {
+                            builder.AllowAnyOrigin();
+                        }
+
+                        if (corsOption.AllowedHeaders != null && corsOption.AllowedHeaders.Any())
+                        {
+                            builder
+                                .WithHeaders(corsOption.AllowedHeaders.ToArray());
+                        }
+                        else
+                        {
+                            builder.AllowAnyHeader();
+                        }
+
+                        builder
+                            .AllowAnyMethod();
+                    }
+                );
+            });
+
+            return services;
+        }
     }
+}
 }

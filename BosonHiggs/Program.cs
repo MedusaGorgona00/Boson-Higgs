@@ -11,10 +11,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbCtx(configuration)
-    //.AddSerilog1(configuration, logging) TODO: recomment after changing connectionString
+    .AddSerilog1(configuration, logging)
     .RegisterServices()
     .AddEmailServices(configuration)
     .AddOptions(configuration);
+
+builder.Services.AddCorsPolicy("CorsPolicy", configuration);
 
 var app = builder.Build();
 

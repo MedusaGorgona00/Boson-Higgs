@@ -8,7 +8,7 @@
 
         public static readonly string LastLevelLogin = "boson.higgs.devfest@gmail.com";
 
-        public static readonly string LastLevelPassword = "SimbaTest"; //TODO: change
+        public static readonly string LastLevelPassword = "DevFest3301Meduza"; //TODO: change
 
         public static readonly string AdminToken = Guid.NewGuid().ToString();
 
