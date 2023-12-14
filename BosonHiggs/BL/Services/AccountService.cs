@@ -55,7 +55,7 @@ namespace BosonHiggsApi.BL.Services
             return user.Token;
         }
 
-        public async Task<LeaderModel> AboutMe(string userToken)
+        public async Task<UserModel> AboutMe(string userToken)
         {
             var user = await _context.Users
                 .Include(x => x.UserLevels)
@@ -76,8 +76,9 @@ namespace BosonHiggsApi.BL.Services
                 totalSpentTime += userLevel.CreatedDateTime.Minute - last.CreatedDateTime.Minute;
             }
 
-            return new LeaderModel
+            return new UserModel()
             {
+                Id = user.Id,
                 NickName = user.NickName,
                 LevelType = user.UserLevels.Max(x => x.Level.Type),
                 TotalSpentTime = totalSpentTime,

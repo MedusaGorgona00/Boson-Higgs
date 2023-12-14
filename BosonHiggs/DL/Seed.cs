@@ -139,12 +139,19 @@ namespace BosonHiggsApi.DL
 
         public static async Task SeedAdmin(ApplicationDbContext context)
         {
+            var admin = await context.Users.FirstOrDefaultAsync(x => x.NickName == "Admin");
+            if (admin != null)
+            {
+                context.Remove(admin);
+                await context.SaveChangesAsync();
+            }
+
             if (!context.Users.Any(x => x.NickName == "Admin"))
             {
                 await context.Users.AddAsync(new User
                 {
-                    Id = Guid.NewGuid().ToString(),
-                    Token = AppConstants.AdminToken,
+                    Id = "2f58ae8e-1951-4945-81fe-1adf02827b06",
+                    Token = "i2FqEUqrGKutuz7AlFQ2ryQfheotfDf1tD7IEE1z2ZS1KmEMPIeDL9TqTZf4T4uI",
                     Email = "abakirova.elizat@gmail.com",
                     NickName = "Admin",
                     CreatedDateTime = DateTime.Now,

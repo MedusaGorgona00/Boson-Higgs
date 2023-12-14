@@ -2,8 +2,9 @@
 
 namespace BosonHiggsApi.BL.Models
 {
-    public class LeaderModel
+    public class UserModel
     {
+        public string Id { get; set; }
         public string NickName { get; set; }
         public LevelType LevelType { get; set; }
         public int TotalSpentTime{ get; set; }
