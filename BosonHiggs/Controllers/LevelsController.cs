@@ -20,11 +20,11 @@ namespace BosonHiggsApi.Controllers
             _levelService = levelService;
         }
 
-        [HttpGet]
+        [HttpGet] //TODO: hide
         [ProducesResponseType(typeof(IList<LevelModel.GetByAdmin>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> List([Required] string userToken)
+        public async Task<IActionResult> List()
         {
-            var result = await _levelService.List(userToken);
+            var result = await _levelService.List();
 
             return Ok(result);
         }
@@ -60,7 +60,7 @@ namespace BosonHiggsApi.Controllers
             return Ok(result);
         }
 
-        [HttpPut]
+        [HttpPut] //TODO: hide
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Update([Required] LevelModel.Update model)
         {
