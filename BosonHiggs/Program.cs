@@ -47,6 +47,7 @@ if (!app.Environment.IsDevelopment())
 //}
 app.MapHub<ChatHub>("/chat");
 app.UseMiddleware<ErrorHandlingMiddleware>();
+app.UseCors("CorsPolicy");
 app.UseAuthorization();
 
 app.MapControllers();
