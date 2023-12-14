@@ -18,6 +18,12 @@ namespace BosonHiggsApi.BL.Services
 
         public async Task Update(LevelModel.Update model)
         {
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Token == model.UserToken);
+            if (user == null)
+                throw new NotFoundException("User with given token not found");
+            if (user.NickName != "Admin")
+                throw new ForbiddenException("Only admin has access");
+
             var level = await _context.Levels
                 .FirstOrDefaultAsync(x => x.Id == model.Id);
             if (level == null)
@@ -183,8 +189,14 @@ namespace BosonHiggsApi.BL.Services
             return level?.NextLevel?.Token;
         }
 
-        public async Task<IList<LevelModel.GetByAdmin>> List()
+        public async Task<IList<LevelModel.GetByAdmin>> List(string userToken)
         {
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Token == userToken);
+            if (user == null)
+                throw new NotFoundException("User with given token not found");
+            if (user.NickName != "Admin")
+                throw new ForbiddenException("Only admin has access");
+
             return await _context.Levels.Select(x => new LevelModel.GetByAdmin()
                     {
                         Id = x.Id,

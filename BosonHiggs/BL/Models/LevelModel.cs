@@ -25,6 +25,8 @@ namespace BosonHiggsApi.BL.Models
             public string? Token { get; set; }
 
             public string? NextLevelId { get; set; }
+
+            public string? UserToken { get; set; }
         }
 
         public class GetByUser : Base

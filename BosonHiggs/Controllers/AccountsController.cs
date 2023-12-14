@@ -32,7 +32,7 @@ namespace BosonHiggsApi.Controllers
 
 
         [HttpGet("about-me")]
-        [ProducesResponseType(typeof(LeaderModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(UserModel), StatusCodes.Status200OK)]
         public async Task<IActionResult> AboutMe(string userToken)
         {
             var result = await _accountService.AboutMe(userToken);

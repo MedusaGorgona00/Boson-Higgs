@@ -20,7 +20,7 @@ namespace BosonHiggsApi.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(IList<LeaderModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(LeaderBoardModel), StatusCodes.Status200OK)]
         public async Task<IActionResult> List()
         {
             var result = await _LeaderBoardService.List();

@@ -22,9 +22,9 @@ namespace BosonHiggsApi.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(IList<LevelModel.GetByAdmin>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List([Required] string userToken)
         {
-            var result = await _levelService.List();
+            var result = await _levelService.List(userToken);
 
             return Ok(result);
         }
