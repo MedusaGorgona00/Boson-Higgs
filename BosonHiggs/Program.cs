@@ -14,9 +14,8 @@ builder.Services.AddDbCtx(configuration)
     .AddSerilog1(configuration, logging)
     .RegisterServices()
     .AddEmailServices(configuration)
-    .AddOptions(configuration);
-
-builder.Services.AddCorsPolicy("CorsPolicy", configuration);
+    .AddOptions(configuration)
+    .AddCorsPolicy("CorsPolicy", configuration);
 
 var app = builder.Build();
 
