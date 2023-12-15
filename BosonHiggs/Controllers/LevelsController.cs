@@ -20,16 +20,6 @@ namespace BosonHiggsApi.Controllers
             _levelService = levelService;
         }
 
-        [HttpGet] //TODO: hide
-        [ProducesResponseType(typeof(IList<LevelModel.GetByAdmin>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> List()
-        {
-            var result = await _levelService.List();
-
-            return Ok(result);
-        }
-
-
         [HttpGet("by-token")]
         [IpRequestThrottling(100, 1)]
         [ProducesResponseType(typeof(LevelModel.GetByUser), StatusCodes.Status200OK)]
@@ -58,15 +48,6 @@ namespace BosonHiggsApi.Controllers
             var result = await _levelService.GetNextLevelToken(id, userToken);
 
             return Ok(result);
-        }
-
-        [HttpPut] //TODO: hide
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> Update([Required] LevelModel.Update model)
-        {
-            await _levelService.Update(model);
-
-            return NoContent();
         }
     }
 }

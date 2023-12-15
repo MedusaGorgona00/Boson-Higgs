@@ -65,7 +65,7 @@ namespace BosonHiggsApi.BL.Services
                 throw new BadRequestException($"User with the token - \'{userToken}\' doesn't exist");
 
             var totalSpentTime = 0;
-            var last = user.UserLevels.FirstOrDefault();
+            var last = (user?.UserLevels).FirstOrDefault();
             if (last == null)
             {
                 return new UserModel()
@@ -89,6 +89,7 @@ namespace BosonHiggsApi.BL.Services
                 }
 
                 totalSpentTime += userLevel.CreatedDateTime.Minute - last.CreatedDateTime.Minute;
+                last = userLevel;
             }
 
             return new UserModel()
