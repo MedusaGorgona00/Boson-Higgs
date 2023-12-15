@@ -72,6 +72,7 @@ namespace BosonHiggsApi.BL.Services
 
             var messages = _context.Messages
                 .Include(x => x.User)
+                .OrderBy(x => x.Id)
                 .Select(x => new MessageModel.Out()
                 {
                     Id = x.Id,
