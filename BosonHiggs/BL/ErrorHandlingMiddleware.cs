@@ -81,16 +81,9 @@ namespace BosonHiggsApi.BL
         private Task HandleExceptionAsync(HttpContext context, Exception exception, string bodyAsText)
         {
             var (code, message) = GetHttpStatusCodeAndMessage(exception);
-            if (code >= HttpStatusCode.InternalServerError)
-            {
-                var fullRequestPath = $"{context.Request.Method} {context.Request.Scheme}://{context.Request.Host}{context.Request.Path}{context.Request.QueryString}";
-                var str = $"Exception type: {exception.GetType()} \n Path: {fullRequestPath} \n Body: {bodyAsText} \n Message: {exception.Message} \n InnerException: {exception.JoinInnerExceptions()} \n"; // StackTrace: {exception.StackTrace}"; TODO:configure out do we need stacktrace 
-                _logger.LogError(str);
-            }
-            else
-            {
-                _logger.LogError(exception, "UnhandledException");
-            }
+            var fullRequestPath = $"{context.Request.Method} {context.Request.Scheme}://{context.Request.Host}{context.Request.Path}{context.Request.QueryString}";
+            var str = $"Exception type: {exception.GetType()} \n Path: {fullRequestPath} \n Body: {bodyAsText} \n Message: {exception.Message} \n InnerException: {exception.JoinInnerExceptions()} \n"; // StackTrace: {exception.StackTrace}"; TODO:configure out do we need stacktrace 
+            _logger.LogError(str);
 
             context.Response.ContentType = MediaTypeNames.Application.Json;
             context.Response.StatusCode = (int)code;

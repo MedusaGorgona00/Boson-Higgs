@@ -76,7 +76,7 @@ namespace BosonHiggsApi.BL.Services
                 {
                     Id = x.Id,
                     Text = x.Text,
-                    NickName = user.NickName,
+                    NickName = x.User.NickName,
                     IsDeleted = x.IsDeleted,
                     CreatedDateTime = x.CreatedDateTime
                 })
