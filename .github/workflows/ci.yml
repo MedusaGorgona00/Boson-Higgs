@@ -37,8 +37,8 @@ jobs:
     - name: Deploy to EC2
       run: |
           echo "$PRIVATE_KEY" > private_key && chmod 400 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} 'cd /home/ec2-user/ && \
-          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 507095017304.dkr.ecr.us-east-1.amazonaws.com \
+          ssh -o StrictHostKeyChecking=no -i private_key ec2-user@52.87.62.2 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 507095017304.dkr.ecr.us-east-1.amazonaws.com'
+          ssh -o StrictHostKeyChecking=no -i private_key ec2-user@52.87.62.2 'cd /home/ec2-user/ && \
           docker pull ${{ secrets.LATEST_IMAGE}} && \
           docker-compose -f docker-compose.api.yml up -d --force-recreate'
         
