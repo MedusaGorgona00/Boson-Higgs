@@ -59,6 +59,7 @@ namespace BosonHiggsApi.BL.Services
         {
             var user = await _context.Users
                 .Include(x => x.UserLevels)
+                .ThenInclude(x => x.Level)
                 .FirstOrDefaultAsync(x => x.Token == userToken);
             if (user == null)
                 throw new BadRequestException($"User with the token - \'{userToken}\' doesn't exist");
