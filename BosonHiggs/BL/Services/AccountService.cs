@@ -65,6 +65,20 @@ namespace BosonHiggsApi.BL.Services
 
             var totalSpentTime = 0;
             var last = user.UserLevels.FirstOrDefault();
+            if (last == null)
+            {
+                return new UserModel()
+                {
+                    Id = user.Id,
+                    NickName = user.NickName,
+                    LevelType = 0,
+                    TotalSpentTime = totalSpentTime,
+                    UsedHintsCount = 0,
+                    UsedNextLevelHintsCount = 0,
+                    LastLevelStartedDateTime = null
+                };
+            }
+
             foreach (var userLevel in user.UserLevels.OrderBy(x => x.CreatedDateTime))
             {
                 if (userLevel.Level.Type == LevelType.First)
