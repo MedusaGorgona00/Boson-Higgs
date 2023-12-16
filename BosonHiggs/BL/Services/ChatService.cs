@@ -35,8 +35,12 @@ namespace BosonHiggsApi.BL.Services
                 })
                 .ToList();
 
-            var json = Newtonsoft.Json.JsonConvert.SerializeObject(levels);
-            if (json.Contains(model.Text) || model.Text.Contains(AppConstants.LastLevelPassword))
+            foreach (var level in levels)
+            {
+                if (model.Text.Contains(level.Id) || model.Text.Contains(level.Token) || model.Text.Contains(level.Link))
+                    throw new BadRequestException("Mustn't send hints, level tokens, level ids as message");
+            }
+            if (model.Text.Contains(AppConstants.LastLevelPassword))
                 throw new BadRequestException("Mustn't send hints, level tokens, level ids as message");
             if (AppConstants.BadWords.Contains(model.Text.ToLower()))
                 throw new BadRequestException("Mustn't use an obscene words in message");

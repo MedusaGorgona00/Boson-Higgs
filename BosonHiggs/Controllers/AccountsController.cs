@@ -20,7 +20,7 @@ namespace BosonHiggsApi.Controllers
         }
 
         [HttpPost("register")]
-        [IpRequestThrottling(10, 1)]
+       // [IpRequestThrottling(10, 1)]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {

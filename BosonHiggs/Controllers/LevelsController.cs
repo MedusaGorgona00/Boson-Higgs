@@ -21,7 +21,7 @@ namespace BosonHiggsApi.Controllers
         }
 
         [HttpGet("by-token")]
-        [IpRequestThrottling(100, 1)]
+        //[IpRequestThrottling(100, 1)]
         [ProducesResponseType(typeof(LevelModel.GetByUser), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetByToken([Required] string token, [Required] string userToken)
         {
@@ -31,7 +31,7 @@ namespace BosonHiggsApi.Controllers
         }
 
         [HttpGet("get-hint")]
-        [IpRequestThrottling(10, 1)]
+        //[IpRequestThrottling(10, 1)]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetHint([Required] string id, [Required] string userToken)
         {
@@ -41,7 +41,7 @@ namespace BosonHiggsApi.Controllers
         }
 
         [HttpGet("get-next-level-token")]
-        [IpRequestThrottling(10, 1)]
+        //[IpRequestThrottling(10, 1)]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetNextLevelToken([Required] string id, [Required] string userToken)
         {

@@ -42,7 +42,7 @@ namespace BosonHiggsApi.BL.Services
             await _context.SaveChangesAsync();
             
 
-            return "Wow, you guessed password! Good job :)";
+            return "https://docs.google.com/document/d/1XKKQLW8ccwL-L2Oeg4jxQqwu4XNdcj-RX3-TEBuzSv4/edit?usp=sharing";
         }
     }
 }

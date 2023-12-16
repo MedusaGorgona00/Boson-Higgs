@@ -20,7 +20,7 @@ namespace BosonHiggsApi.Controllers
         }
 
         [HttpPost("send-message")]
-        [IpRequestThrottling(100, 1)]
+        //[IpRequestThrottling(100, 1)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> SendMessage([FromBody] MessageModel.In model)
         {

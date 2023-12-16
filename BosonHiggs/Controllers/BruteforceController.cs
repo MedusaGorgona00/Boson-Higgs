@@ -22,7 +22,7 @@ namespace BosonHiggsApi.Controllers
         }
 
         [HttpPost("login")] //TODO: check ddos
-        [IpRequestThrottling(10, 1)]
+        //[IpRequestThrottling(10, 1)]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         public async Task<IActionResult> Login([FromBody] BruteforceModel model)
         {
